@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://m4qgcuyfflha"]
+
+[ext_resource type="Script" path="res://Main.cs" id="1_48e78"]
+[ext_resource type="PackedScene" uid="uid://b86x8ffnhk7ge" path="res://Game.tscn" id="2_4sssu"]
+[ext_resource type="PackedScene" uid="uid://drj6xgjoxko4p" path="res://Lobby.tscn" id="2_s7rmb"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_48e78")
+
+[node name="Game" parent="." instance=ExtResource("2_4sssu")]
+unique_name_in_owner = true
+visible = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Lobby" parent="CanvasLayer" instance=ExtResource("2_s7rmb")]
+unique_name_in_owner = true
