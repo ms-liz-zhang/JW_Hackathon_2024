@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://dev622pkpos27"]
+
+[ext_resource type="Script" path="res://Projectile.cs" id="1_3xd6q"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l6v0p"]
+radius = 13.0
+height = 166.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_smvka"]
+size = Vector2(20, 20)
+
+[node name="Projectile" type="Node2D"]
+script = ExtResource("1_3xd6q")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 2
+mass = 0.001
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_l6v0p")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+unique_name_in_owner = true
+position = Vector2(-3.8147e-06, -1)
+scale = Vector2(7.95, 0.95)
+texture = SubResource("PlaceholderTexture2D_smvka")
+
+[connection signal="body_entered" from="RigidBody2D" to="." method="_on_rigid_body_2d_body_entered"]

@@ -1,23 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4na1fi5ewo8s"]
+[gd_scene load_steps=5 format=3 uid="uid://c4na1fi5ewo8s"]
 
 [ext_resource type="Script" path="res://Player.cs" id="1_sbf76"]
+[ext_resource type="PackedScene" uid="uid://dev622pkpos27" path="res://Projectile.tscn" id="2_cg4su"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_avofp"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oxwlx"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_mvkk2"]
+radius = 52.0096
 
-[node name="Player" type="Node2D"]
+[node name="Player" type="RigidBody2D"]
+collision_mask = 2
+gravity_scale = 0.0
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 1
 script = ExtResource("1_sbf76")
+ProjectileScene = ExtResource("2_cg4su")
 
-[node name="CharacterBody2D" type="RigidBody2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-constant_force = Vector2(0, 1)
-
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-unique_name_in_owner = true
-position = Vector2(4.76837e-07, 2.38419e-07)
-scale = Vector2(20, 20)
+position = Vector2(3.8147e-06, -3.8147e-06)
+scale = Vector2(104, 104)
 texture = SubResource("PlaceholderTexture2D_avofp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-shape = SubResource("RectangleShape2D_oxwlx")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mvkk2")
+
+[node name="FiringPoint" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(76, 0)
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
